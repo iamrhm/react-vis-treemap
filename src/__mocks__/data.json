@@ -1,0 +1,52 @@
+[
+  {
+    "Sector": "Industrials",
+    "Return Attribution": "-1.83%",
+    "Free Float": 282.21
+  },
+  {
+    "Sector": "Materials",
+    "Return Attribution": "-2.44%",
+    "Free Float": 588.18
+  },
+  {
+    "Sector": "Financials",
+    "Return Attribution": "-0.78%",
+    "Free Float": "2,603.27"
+  },
+  {
+    "Sector": "Consumer Discretionary",
+    "Return Attribution": "-1.46%",
+    "Free Float": 402.11
+  },
+  {
+    "Sector": "Communication Services",
+    "Return Attribution": "-0.63%",
+    "Free Float": 149.53
+  },
+  {
+    "Sector": "Energy",
+    "Return Attribution": "-1.22%",
+    "Free Float": 800.19
+  },
+  {
+    "Sector": "Consumer Staples",
+    "Return Attribution": "1.51%",
+    "Free Float": 572.42
+  },
+  {
+    "Sector": "Health Care",
+    "Return Attribution": "-2.38%",
+    "Free Float": 236.01
+  },
+  {
+    "Sector": "Information Technology",
+    "Return Attribution": "-0.18%",
+    "Free Float": "1,288.26"
+  },
+  {
+    "Sector": "Utilities",
+    "Return Attribution": "-1.30%",
+    "Free Float": 115.05
+  }
+]

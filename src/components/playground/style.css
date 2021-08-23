@@ -1,0 +1,54 @@
+.user-playground-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-panels{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input-box {
+  border: 1px solid rgb(189, 195, 203);
+  box-shadow: rgb(0 0 0 / 6%) 0px 1px 2px 0px;
+  height: 34px;
+  border-radius: 4px;
+  padding: 2px 14px;
+  font-size: 12px;
+  color: rgb(47, 54, 63);
+  outline: 0px;
+  margin: 12px 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.input-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.user-input-container {
+  padding: 10px 0;
+}
+
+.update-button {
+  background-color: #624bff;
+  color: #ffffff;
+  border: solid #624bff 1px;
+  padding: 9px 12px;
+  font-size: 14px;
+  line-height: 16px;
+  outline: none;
+  display: inline-block;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 500;
+}
+
+.align-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
