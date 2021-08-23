@@ -1,18 +1,9 @@
 import React from 'react';
+
+import { validate } from './validation';
 import './style.css'
 
-const initialState = {
-  width: 600,
-  height: 400,
-  minNegativeColor: 'red',
-  maxNegativeColor: 'darkred',
-  minPositiveColor: 'green',
-  maxPositiveColor: 'darkgreen',
-}
-
-function reducer(state = {
-  ...initialState
-}, action){
+function reducer(state, action){
   switch(action.type){
     case 'update-min-negative-color':
       return {...state, minNegativeColor: action.payload}
@@ -26,17 +17,28 @@ function reducer(state = {
       return {...state, width: action.payload}
     case 'update-height':
       return {...state, height: action.payload}
+    case 'update-is-single-color':
+      return {...state, isSingleColor: action.payload}
+    case 'update-state':
+      return {...state, ...action.payload}
     default:
       return state;
   }
 }
 
-const Playground = () => {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+const Playground = ({
+  data,
+  updateData = () => {}
+}) => {
+  const [state, dispatch] = React.useReducer(reducer, data);
+  const [errorMessage, updateErrorMessage] = React.useState();
 
   const handleInputChange = (e) => {
     const name = e.target.name;
-    const value = e.target.value;
+    let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    if(name === 'update-width' || name === 'update-height') {
+      value = Number(value);
+    }
     dispatch({
       type: name,
       payload: value
@@ -44,8 +46,19 @@ const Playground = () => {
   }
 
   const handleUpdate = () => {
-    console.log(state);
+    const validationOp = validate(state);
+    if(validationOp.isValid) {
+      updateData({...state});
+    }
+    updateErrorMessage(validationOp.messages);
   }
+
+  React.useEffect(()=> {
+    dispatch({
+      type: 'update-state',
+      payload: data
+    })
+  },[data]);
 
   return(
     <div className="user-playground-container">
@@ -73,7 +86,10 @@ const Playground = () => {
 
       <div className="user-input-container">
         <div className="input-label">
-          Enter negative colors min - max
+          Enter negative color{state.isSingleColor ? '' : 's min - max'}
+        </div>
+        <div className="input-label-hints">
+          Enter hex, name color or rgb value, <br/> Yes we are enough smart to understand what you want 😎
         </div>
         <div className="input-panels">
           <input
@@ -83,19 +99,27 @@ const Playground = () => {
             onChange={handleInputChange}
             className="input-box"
           />
-          <input
-            type="text"
-            value={state.maxNegativeColor}
-            name="update-max-negative-color"
-            onChange={handleInputChange}
-            className="input-box"
-          />
+          {
+            !state.isSingleColor &&
+            (
+              <input
+                type="text"
+                value={state.maxNegativeColor}
+                name="update-max-negative-color"
+                onChange={handleInputChange}
+                className="input-box"
+              />
+            )
+          }
         </div>
       </div>
 
       <div className="user-input-container">
         <div className="input-label">
-          Enter positive colors min - max
+          Enter positive color{state.isSingleColor ? '' : 's min - max'}
+        </div>
+        <div className="input-label-hints">
+          Enter hex, name color or rgb value, <br/> Yes we are enough smart to understand what you want 😎
         </div>
         <div className="input-panels">
           <input
@@ -105,13 +129,32 @@ const Playground = () => {
             onChange={handleInputChange}
             className="input-box"
           />
-          <input
-            type="text"
-            value={state.maxPositiveColor}
-            name="update-max-positive-color"
-            onChange={handleInputChange}
-            className="input-box"
-          />
+          {
+            !state.isSingleColor &&
+            (
+              <input
+                type="text"
+                value={state.maxPositiveColor}
+                name="update-max-positive-color"
+                onChange={handleInputChange}
+                className="input-box"
+              />
+            )
+          }
+        </div>
+      </div>
+
+      <div className="user-input-container check-box-container">
+        <input
+          type="checkbox"
+          name="update-is-single-color"
+          className="input-checkbox"
+          defaultChecked={state.isSingleColor}
+          onChange={handleInputChange}
+        />
+        <div className="checkbox-label">
+          I would like to try out with one color each, <br />
+          because I am boring 😐
         </div>
       </div>
 
@@ -120,9 +163,18 @@ const Playground = () => {
           className="update-button"
           onClick={handleUpdate}
         >
-          Now Show Me the Magic
+          Leviosa 💫
         </button>
       </div>
+
+      {
+        errorMessage &&
+        (
+          <div className="user-input-container align-center danger">
+            {errorMessage}
+          </div>
+        )
+      }
     </div>
   )
 }
