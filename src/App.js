@@ -20,8 +20,9 @@ const App = () => {
 
   React.useLayoutEffect(() => {
     if(window){
+      const coefficient = window.innerWidth > 991 ? 0.7 : 1;
       updateDummyWidth(
-        ((window.innerWidth * (0.7)) - (state.width + 50)) / 2
+        ((window.innerWidth * coefficient) - (state.width + 50)) / 2
       );
     }
   }, [state.width]);

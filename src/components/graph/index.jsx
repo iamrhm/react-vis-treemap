@@ -123,7 +123,7 @@ const Graph = ({
       <>
         <div className="color-details">
           <div  className="title-color-palette">
-            Negative Colors <br/> (minInputVal → maxInputVal)
+            Negative Colors <br/> {!graphData.isSingleColor ? '(minInputVal → maxInputVal)' : ''}
           </div>
           <div className="negative-palette">
             {
@@ -142,7 +142,7 @@ const Graph = ({
         </div>
         <div className="color-details">
           <div  className="title-color-palette">
-            Positive Colors <br/> (minInputVal → maxInputVal) &nbsp;
+            Positive Colors <br/> {!graphData.isSingleColor ? '(minInputVal → maxInputVal)' : ''} &nbsp;
           </div>
           <div className="positive-palette">
             {

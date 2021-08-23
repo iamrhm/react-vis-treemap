@@ -29,3 +29,13 @@
   justify-content: center;
   padding: 26px 0;
 }
+
+@media (max-width: 991px) {
+  .container {
+    flex-direction: column-reverse;
+    height: unset;
+  }
+  .graph-container, .playground-container{
+    width: 100%;
+  }
+}

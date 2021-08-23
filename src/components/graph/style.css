@@ -81,3 +81,13 @@
   border: 4px solid white;
   border-radius: 6px;
 }
+
+@media (max-width: 991px) {
+  .color-details{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .title-color-palette {
+    padding-bottom: 12px;
+  }
+}
