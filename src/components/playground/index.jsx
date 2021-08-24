@@ -1,9 +1,12 @@
 import React from 'react';
 
 import { validate } from './validation';
+import JSONEditor from '../json-editor';
+
 import './style.css'
 
 function reducer(state, action){
+  console.log(action.playground)
   switch(action.type){
     case 'update-min-negative-color':
       return {...state, minNegativeColor: action.payload}
@@ -21,16 +24,18 @@ function reducer(state, action){
       return {...state, isSingleColor: action.payload}
     case 'update-state':
       return {...state, ...action.payload}
+    case 'update-json-data':
+      return {...state, jsonData : action.payload}
     default:
       return state;
   }
 }
 
 const Playground = ({
-  data,
+  playgroundData,
   updateData = () => {}
 }) => {
-  const [state, dispatch] = React.useReducer(reducer, data);
+  const [state, dispatch] = React.useReducer(reducer, playgroundData);
   const [errorMessage, updateErrorMessage] = React.useState();
 
   const handleInputChange = (e) => {
@@ -46,6 +51,7 @@ const Playground = ({
   }
 
   const handleUpdate = () => {
+    debugger
     const validationOp = validate(state);
     if(validationOp.isValid) {
       updateData({...state});
@@ -53,12 +59,19 @@ const Playground = ({
     updateErrorMessage(validationOp.messages);
   }
 
+  const updateInputJSON = (data) => {
+    dispatch({
+      type: 'update-json-data',
+      payload: data
+    });
+  }
+
   React.useEffect(()=> {
     dispatch({
       type: 'update-state',
-      payload: data
+      payload: playgroundData
     })
-  },[data]);
+  },[playgroundData]);
 
   return(
     <div className="user-playground-container">
@@ -158,6 +171,16 @@ const Playground = ({
         </div>
       </div>
 
+      <div className="user-input-container">
+        <div className="input-label">
+          Edit the below JSON
+        </div>
+        <JSONEditor
+          inputJSON={state.jsonData}
+          updateJSON={updateInputJSON}
+        />
+      </div>
+
       <div className="user-input-container align-center">
         <button
           className="update-button"
@@ -166,7 +189,6 @@ const Playground = ({
           Leviosa 💫
         </button>
       </div>
-
       {
         errorMessage &&
         (

@@ -3,7 +3,6 @@ import { Treemap } from 'react-vis';
 import chroma from 'chroma-js';
 import '../../../node_modules/react-vis/dist/style.css';
 
-import mockData from '../../__mocks__/data.json';
 import './style.css';
 
 const Graph = ({
@@ -25,16 +24,38 @@ const Graph = ({
 
   const getTitleComponent = (title, displayValue, size) => {
     const returnAttribute = (Number(displayValue.split('%')[0]));
-    const sign = Math.sign(returnAttribute) < 0 ? '⬇️' :
-      (Math.sign(returnAttribute) === 0 ? '' : '⬆️')
+    const getSign = () => {
+      if(Math.sign(returnAttribute) < 0 ) {
+        return  (
+          <span class="material-icons ">
+            arrow_drop_down
+          </span>
+        )
+      } else if (Math.sign(returnAttribute > 0)) {
+        return (
+          <span class="material-icons ">
+            arrow_drop_up
+          </span>
+        )
+      } else {
+        return null;
+      }
+    }
     return (
       <div className="title-holder">
-        <span className="title">{title}</span>
-        <span className="display-value">
-          {sign} &nbsp;
+        <div className="title">{title}</div>
+        <div className="display-value">
+          {getSign()}
+          &nbsp;
           {Math.abs(returnAttribute)}
-        </span>
-        <span className="display-size">▉ {Number(size).toFixed(2)}</span>
+        </div>
+        <div className="display-size">
+          <span class="material-icons box-icon-style">
+            crop_5_4
+          </span>
+          &nbsp;
+          {Number(size).toFixed(2)}
+        </div>
       </div>
     )
   }
@@ -49,7 +70,7 @@ const Graph = ({
       colors: () => {}
     };
 
-    let leafData = (mockData || []).map((data) => {
+    let leafData = (graphData.jsonData || []).map((data) => {
       const freeFloat = !isNaN(Number(data['Free Float'])) ?
         Number(data['Free Float']) :
         Number(`${data['Free Float']}`.split(',').join(''));

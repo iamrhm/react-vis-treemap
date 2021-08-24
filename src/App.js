@@ -4,6 +4,8 @@ import './App.css';
 import Graph from './components/graph'
 import Playground from './components/playground';
 
+import mockData from './__mocks__/data.json';
+
 const initialState = {
   width: 600,
   height: 400,
@@ -12,6 +14,7 @@ const initialState = {
   minPositiveColor: 'green',
   maxPositiveColor: 'darkgreen',
   isSingleColor: false,
+  jsonData: mockData,
 }
 
 const App = () => {
@@ -46,7 +49,7 @@ const App = () => {
       </div>
       <div className="playground-container">
         <Playground
-          data={state}
+          playgroundData={state}
           updateData={updateState}
         />
       </div>

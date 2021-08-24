@@ -1,0 +1,102 @@
+.json-editor-container{
+  position: relative;
+  margin: 20px 0;
+  box-shadow: rgb(0 0 0 / 6%) 1px 13px 20px 3px, rgb(0 0 0 / 6%) 1px -3px 20px 0px;
+  border-radius: 4px;
+  padding: 12px;
+}
+.json-values-display{
+  padding-left: 12px;
+}
+.display-key-value {
+  font-size: 14px;
+  text-transform: lowercase;
+  font-weight: 500;
+  color: #535B62;
+  margin-right: 12px;
+}
+.braces{
+  color: #535b62c4
+}
+.row {
+  padding: 2px 0;
+}
+.json-input-box{
+  border: none ;
+  padding: 4px;
+  padding: 2px;
+  font-size: 12px;
+  color: rgb(47, 54, 63);
+  outline: 0px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.json-blocks {
+  position: relative;
+  padding: 10px 0;
+}
+.icon-styles {
+  color: #6b6b76ad;
+  font-size: 12px;
+}
+.json-delete{
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  box-shadow: 0px 3px 10px 0px rgb(0 0 0 / 12%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  bottom: 0px;
+  cursor: pointer;
+}
+.add-button-container{
+  width: 100%;
+  position: relative;
+  margin-top: 34px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+}
+.add-button{
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  box-shadow: 0px 3px 10px 0px rgb(0 0 0 / 12%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.add-style{
+  font-size: 14px;
+  color: #535b62
+}
+.json-editor-update {
+  width: 100%;
+  text-align: right;
+}
+.json-info-holder{
+  height: 28px;
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.json-editor-message{
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: capitalize;
+  position: absolute;
+  right: 6px;
+  bottom: 3px;
+  padding: 4px;
+  border: 1px solid #1f7ae0;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #1f7ae0;
+  background: #c7def9c4;
+}
