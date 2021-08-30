@@ -20,6 +20,7 @@
   height: fit-content;
   position: relative;
   padding-bottom: 80px;
+  justify-content: center;
 }
 
 @media (max-width: 991px) {
