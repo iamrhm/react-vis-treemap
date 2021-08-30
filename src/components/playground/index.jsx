@@ -77,7 +77,10 @@ const Playground = ({
     <div className="user-playground-container">
       <div className="user-input-container">
         <div className="input-label">
-          Enter treemap dimensions (width x height)
+          Enter treemap dimensions (width x height) <br />
+          <div className="input-label-hints">
+            Also responsive
+          </div>
         </div>
         <div className="input-panels">
           <input
