@@ -19,32 +19,12 @@ const initialState = {
 
 const App = () => {
   const [state, updateState] = React.useState(initialState);
-  const [dummyWidth, updateDummyWidth] = React.useState();
-
-  React.useLayoutEffect(() => {
-    if(window){
-      const coefficient = window.innerWidth > 991 ? 0.7 : 1;
-      updateDummyWidth(
-        ((window.innerWidth * coefficient) - (state.width + 50)) / 2
-      );
-    }
-  }, [state.width]);
 
   return (
     <div className="container">
       <div className="graph-container">
-        <div className="dummy-padding"
-          style={{
-            "width": `${dummyWidth}px`
-          }}
-        />
         <Graph
           graphData={state}
-        />
-        <div className="dummy-padding"
-          style={{
-            "width": `${dummyWidth}px`
-          }}
         />
       </div>
       <div className="playground-container">

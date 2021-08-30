@@ -8,6 +8,11 @@ import './style.css';
 const Graph = ({
   graphData
 }) => {
+  const [dimensions, updateDimensions] = React.useState({
+    width: graphData.width,
+    height: graphData.height,
+  })
+  const treemapRef = React.useRef(null);
   const negativeColorPallet = React.useRef();
   const positiveColorPallet = React.useRef();
 
@@ -27,13 +32,13 @@ const Graph = ({
     const getSign = () => {
       if(Math.sign(returnAttribute) < 0 ) {
         return  (
-          <span class="material-icons ">
+          <span className="material-icons ">
             arrow_drop_down
           </span>
         )
       } else if (Math.sign(returnAttribute > 0)) {
         return (
-          <span class="material-icons ">
+          <span className="material-icons ">
             arrow_drop_up
           </span>
         )
@@ -50,7 +55,7 @@ const Graph = ({
           {Math.abs(returnAttribute)}
         </div>
         <div className="display-size">
-          <span class="material-icons box-icon-style">
+          <span className="material-icons box-icon-style">
             crop_5_4
           </span>
           &nbsp;
@@ -184,28 +189,62 @@ const Graph = ({
     )
   }
 
+  const handResize = () => {
+    if(treemapRef.current) {
+      const width = treemapRef.current.clientWidth;
+      const height = treemapRef.current.clientHeight;
+      updateDimensions({
+        width,
+        height
+      })
+    }
+  }
+
+  React.useEffect(()=>{
+    window.addEventListener("resize", handResize);
+    window.addEventListener("orientationchange", handResize);
+    return () => {
+      window.removeEventListener("resize", handResize);
+      window.removeEventListener("orientationchange", handResize);
+    }
+  },[])
+
+  React.useLayoutEffect(()=>{
+    if(treemapRef.current) {
+      const width = treemapRef.current.clientWidth;
+      const height = treemapRef.current.clientHeight;
+      updateDimensions({
+        width,
+        height
+      })
+    }
+  }, []);
+
   return (
     <div className="graph-fold">
       <div className="wrapper">
         <div className="header">
           Nifty 50 Sector Performance
         </div>
-        <Treemap
-          animation={true}
-          className='treemap-demo-container'
-          colorType='literal'
-          width={graphData.width}
-          height={graphData.height}
-          data={myData}
-          mode='squarify'
-          style= {{
-            "border": '2px solid #ffffff',
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center",
-          }}
-          padding= {0}
-        />
+        <div className="treemap-container" ref={treemapRef}>
+          <Treemap
+            animation={true}
+            className='treemap-demo-container'
+            colorType='literal'
+            width={dimensions.width}
+            height={dimensions.height}
+            data={myData}
+            mode='squarify'
+            style= {{
+              "border": '2px solid #ffffff',
+              "display": "flex",
+              "justifyContent": "center",
+              "alignItems": "center",
+            }}
+            margin= {0}
+            hideRootNode={true}
+          />
+        </div>
       </div>
 
       <div className="color-pallet">

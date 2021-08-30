@@ -62,7 +62,7 @@ const JSONEditor = ({
           </div>
         <span className="display-key-value braces">&#125;</span>
         <div className="json-delete" onClick={() => deleteJsonValue(valuePointer)}>
-          <span class="material-icons icon-styles">
+          <span className="material-icons icon-styles">
             delete
           </span>
         </div>
@@ -85,7 +85,7 @@ const JSONEditor = ({
       }
       <div className="add-button-container">
         <div className="add-button" onClick={(e) => addValue(e)}>
-          <span class="material-icons add-style">
+          <span className="material-icons add-style">
             add
           </span>
         </div>
